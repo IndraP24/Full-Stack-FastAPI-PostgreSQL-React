@@ -45,14 +45,15 @@ def run_migrations_offline() -> None:
     """
     Run migrations in 'offline' mode.
     """
-    
     alembic.context.configure(url=str(DATABASE_URL))
+
     with alembic.context.begin_transaction():
         alembic.context.run_migrations()
 
-    if alembic.context.is_offline_mode():
-        logger.info("Running migrations offline")
-        run_migrations_offline()
-    else:
-        logger.info("Running migrations online")
-        run_migrations_online()
+
+if alembic.context.is_offline_mode():
+    logger.info("Running migrations offline")
+    run_migrations_offline()
+else:
+    logger.info("Running migrations online")
+    run_migrations_online()
